@@ -8,4 +8,4 @@ A simple node server that serves pages which correspond to the following routes:
 
 Any route not listed above will take the user to 404.html.
 
-Be sure to run `npm i` in the directory of the repository.
+Be sure to run `npm i` in the directory of the repository. To start the server, run `npm run start`.
