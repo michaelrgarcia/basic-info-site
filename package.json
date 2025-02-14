@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/michaelrgarcia/basic-info-site#readme",
   "devDependencies": {
+    "@types/express": "^5.0.0",
     "nodemon": "^3.1.9",
     "typescript": "^5.7.3"
   },
