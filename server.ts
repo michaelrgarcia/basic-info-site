@@ -1,53 +1,26 @@
-import * as http from "node:http";
+import express from "express";
+import path from "path";
 
-import { readFile } from "node:fs";
+const app = express();
 
-http
-  .createServer((req, res) => {
-    if (req.url === "/") {
-      readFile("./pages/index.html", (err, data) => {
-        if (err) {
-          throw err;
-        }
+const options = {
+  root: path.join(__dirname, "./pages"),
+};
 
-        res.writeHead(200, { "Content-Type": "text/html" });
-        res.write(data);
+app.get("/", (req, res) => {
+  res.sendFile("index.html", options);
+});
 
-        return res.end();
-      });
-    } else if (req.url === "/about") {
-      readFile("./pages/about.html", (err, data) => {
-        if (err) {
-          throw err;
-        }
+app.get("/about", (req, res) => {
+  res.sendFile("about.html", options);
+});
 
-        res.writeHead(200, { "Content-Type": "text/html" });
-        res.write(data);
+app.get("/contact-me", (req, res) => {
+  res.sendFile("contact-me.html", options);
+});
 
-        return res.end();
-      });
-    } else if (req.url === "/contact-me") {
-      readFile("./pages/contact-me.html", (err, data) => {
-        if (err) {
-          throw err;
-        }
+app.all("*", (req, res) => {
+  res.status(404).sendFile("404.html", options);
+});
 
-        res.writeHead(200, { "Content-Type": "text/html" });
-        res.write(data);
-
-        return res.end();
-      });
-    } else {
-      readFile("./pages/404.html", (err, data) => {
-        if (err) {
-          throw err;
-        }
-
-        res.writeHead(200, { "Content-Type": "text/html" });
-        res.write(data);
-
-        return res.end();
-      });
-    }
-  })
-  .listen(8080);
+app.listen(3000);
